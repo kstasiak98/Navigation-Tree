@@ -1,0 +1,66 @@
+Samochody {
+	Opel {
+		Opony {
+			30 cm
+			40 cm
+			80 cm
+		}
+		Silnik {
+			1.6
+			1.8
+			2.4
+		}
+		Podwozie {
+			Małe
+			Duże
+		}
+	}
+	VW {
+		Opony {
+			30 cm
+			40 cm
+			80 cm
+		}
+		Silnik {
+			1.6
+			1.8
+			2.4
+		}
+		Podwozie {
+			Małe
+			Duże
+		}
+	}
+	Skoda {
+		Opony {
+			30 cm
+			40 cm
+			80 cm
+		}
+		Silnik {
+			1.6
+			1.8
+			2.4
+		}
+		Podwozie {
+			Małe
+			Duże
+		}
+	}
+	Passat {
+		Opony {
+			30 cm
+			40 cm
+			80 cm
+		}
+		Silnik {
+			1.6
+			1.8
+			2.4
+		}
+		Podwozie {
+			Małe
+			Duże
+		}
+	}
+}
