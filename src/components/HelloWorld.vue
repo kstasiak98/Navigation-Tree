@@ -1,41 +1,69 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <h1>Struktura katalogów dla Firmy Samochodowej</h1>
+
+    <button @click="addNode">Dodaj Nowy Katalog</button>
+
+    <vue-tree-list
+        :model="MyTree"
+        default-tree-node-name="katalog"
+        default-leaf-node-name="item"
+        @delete-node="onDel"
+        @add-node="onAddNode"
+    >
+      <span class="icon" title="Dodaj nowa kategorie" slot="addTreeNodeIcon">＋</span>
+      <span class="icon" slot="addLeafNodeIcon"></span>
+      <span class="icon" slot="editNodeIcon">📃</span>
+      <span class="icon" slot="delNodeIcon">✂️</span>
+    </vue-tree-list>
+
   </div>
 </template>
 
 <script>
+import { TreeNode,  Tree } from 'vue-tree-list'
+
 export default {
   name: 'HelloWorld',
+
   props: {
-    msg: String
-  }
+    msg: String,
+
+  },
+  data: () => ({
+      MyTree: new Tree([
+          {name: "Opel", children: [
+                  {name: "silnik", children: null},
+                  {name: "koła", children: null},
+                  {name: "podwozie", children: null},
+              ]},
+          {name: "VW", children: [
+                  {name: "silnik", children: [
+                          {name: "1,6"},
+                          {name: "1,8 TDI"}
+                      ]},
+                  {name: "koła", children: null},
+                  {name: "podwozie", children: null},
+              ]},
+          {name: "Skoda"}
+      ])
+  }),
+    methods: {
+        onDel(node) {
+            console.log(node)
+            node.remove()
+        },
+        onAddNode(params) {
+            console.log(params)
+        },
+        addNode() {
+            var node = new TreeNode({ name: 'Nowy Katalog', isLeaf: false })
+            if (!this.MyTree.children) this.MyTree.children = []
+            this.MyTree.addChildren(node)
+        },
+    },
+
 }
 </script>
 
